@@ -1,15 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { Button, View, StyleSheet } from 'react-native';
+import { Button, View, StyleSheet,TouchableOpacity, } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 
 import Announcement from './screens/Announcement';
 import Calendar from './screens/Calendar';
-import CalendarDemo from './screens/CalendarDemo';
+import DemoCalendar from './screens/DemoCalendar';
+import BasicScreen from './screens/BasicScreen';
 
-
-
+import APICall from './screens/APICall'
 function HomeScreen({ navigation }) {
   return (
     <View>
@@ -23,9 +23,17 @@ function HomeScreen({ navigation }) {
       />
 
 <Button
-        onPress={() => navigation.navigate('CalendarDemo')}
+        onPress={() => navigation.navigate('DemoCalendar')}
         title="Go to Calendar"
       />
+      <Button
+        onPress={() => navigation.navigate('BasicScreen')}
+        title="Go to Calendar"
+      />
+      {/* <Button
+        onPress={() => navigation.navigate('APICall')}
+        title="Go to API"
+      /> */}
     </View>
   );
 }
@@ -48,7 +56,9 @@ export default function App() {
       <Drawer.Navigator initialRouteName="Announcement">
         <Drawer.Screen name="Announcement" component={Announcement} />
         <Drawer.Screen name="Calendar" component={Calendar} />
-        <Drawer.Screen name="CalendarDemo" component={CalendarDemo} />
+        <Drawer.Screen name="DemoCalendar" component={DemoCalendar} />
+        <Drawer.Screen name="BasicScreen" component={BasicScreen} />
+        {/* <Drawer.Screen name="APICall" component={APICall} /> */}
       </Drawer.Navigator>
     </NavigationContainer>
   );

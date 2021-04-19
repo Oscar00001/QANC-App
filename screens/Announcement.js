@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { Button, View, StyleSheet } from 'react-native';
+import { Button, View, StyleSheet,TouchableOpacity,Image } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -10,6 +10,12 @@ import Announcement from '../components/Announcement';
 function Announcements(props) {
     return (
         <View style={styles.background}>
+            <TouchableOpacity  onPress={props.navigation.openDrawer} style={styles.topBar} activeOpacity={0.5}>
+                    <Image
+                    source={require('../assets/favicon.png')}
+                    style={null}
+                    />
+                </TouchableOpacity>
         {/* Today's Ann*/}
             <View style = {styles.taskWrapper}>
                 <Text style = {styles.sectionTitle}>Announcement</Text> 
@@ -19,7 +25,7 @@ function Announcements(props) {
                     <Announcement text = {'Accouncment 2'}/>
                 </View>
             </View>
-            <Button onPress={() => props.navigation.navigate('CalendarDemo')} title="Go to Calendar" />
+            <Button onPress={() => props.navigation.navigate('Calendar')} title="Go to Calendar" />
         </View>
         
 
