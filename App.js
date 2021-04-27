@@ -1,64 +1,33 @@
-import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { Button, View, StyleSheet,TouchableOpacity, } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 
-import Announcement from './screens/Announcement';
-import Calendar from './screens/Calendar';
-import DemoCalendar from './screens/DemoCalendar';
-import BasicScreen from './screens/BasicScreen';
-
-import APICall from './screens/APICall'
-function HomeScreen({ navigation }) {
-  return (
-    <View>
-      <Button
-        onPress={() => navigation.navigate('Announcement')}
-        title="Go to Announcement"
-      />
-      <Button
-        onPress={() => navigation.navigate('Calendar')}
-        title="Go to Calendar"
-      />
-
-<Button
-        onPress={() => navigation.navigate('DemoCalendar')}
-        title="Go to Calendar"
-      />
-      <Button
-        onPress={() => navigation.navigate('BasicScreen')}
-        title="Go to Calendar"
-      />
-      {/* <Button
-        onPress={() => navigation.navigate('APICall')}
-        title="Go to API"
-      /> */}
-    </View>
-  );
-}
-
-function NotificationsScreen({ navigation }) {
-  return (
-    <View>
-      <Button onPress={() => thnavigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
-
-
+import AnnouncementsScreen from './screens/AnnouncementsScreen';
+import CalendarScreen from './screens/CalendarScreen';
+import CalendarTestingScreen from './screens/CalendarTestingScreen';
+import BlankPageTemplateScreen from './screens/BlankPageTemplateScreen';
+import AdminScreen from './screens/AdminScreen';
+import AdminScreen2 from './screens/AdminScreen2';
+import DonationsScreen from './screens/DonationsScreen';
+import HomePageScreen from './screens/HomePageScreen';
+//import RoleScreen from './screens/RoleScreen';
 
 const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Announcement">
-        <Drawer.Screen name="Announcement" component={Announcement} />
-        <Drawer.Screen name="Calendar" component={Calendar} />
-        <Drawer.Screen name="DemoCalendar" component={DemoCalendar} />
-        <Drawer.Screen name="BasicScreen" component={BasicScreen} />
-        {/* <Drawer.Screen name="APICall" component={APICall} /> */}
+      <Drawer.Navigator initialRouteName="Home Page">
+        <Drawer.Screen name="Home Page" component={HomePageScreen} />
+        <Drawer.Screen name="Announcements" component={AnnouncementsScreen} />
+        <Drawer.Screen name="Calendar" component={CalendarScreen} />
+        <Drawer.Screen name="Calendar 2" component={CalendarTestingScreen} />
+        <Drawer.Screen name="Donations" component={DonationsScreen} />
+        <Drawer.Screen name="Admin" component={AdminScreen} />
+        <Drawer.Screen name="Admin2" component={AdminScreen2} />
+        <Drawer.Screen name="Testing screen" component={BlankPageTemplateScreen} />
+        {/* <Drawer.Screen name="Role screen" component={RoleScreen} />      */}
+
       </Drawer.Navigator>
     </NavigationContainer>
   );
