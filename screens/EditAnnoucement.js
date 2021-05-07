@@ -14,25 +14,19 @@ import Icon from 'react-native-vector-icons/Feather';
 const screenWidth = Dimensions.get('window').width;
 
 function AdminScreen(props) {
-    // fetch('https://eo9260z47k.execute-api.us-east-2.amazonaws.com/default/addAnnouncement')
-    // .then((response) => response.json())
-    // .then((responseJson) => {
-    //     console.log(responseJson);
-    // })
 
-
-    const [groups, setGroups] = useState('default')
+    const [id, setID] = useState('default');
     const [title, setTitle] = useState('default');
     const [details, setDetails] = useState('default');
+    const [groups, setGroups] = useState('default');
     const [dateTimePosted, setDateTimePosted] = useState('default');
     let groupsString = [0,0,0,0,0]
     let groupsBits = [0,0,0,0,0]
-    
 
     
-    
+
     const buttonHandeler = () => {
-
+        
         for(let i=0;i<groupsString.length;i++){
             if(groupsString[i] == "staff"){groupsBits[0] = 1}
             if(groupsString[i] == "parents"){groupsBits[1] = 1}
@@ -41,7 +35,6 @@ function AdminScreen(props) {
             if(groupsString[i] == "community"){groupsBits[4] = 1}
         }
         let groupsBitString = "" + groupsBits[0] + groupsBits[1] + groupsBits[2] + groupsBits[3] + groupsBits[4]
-
         var currentDate = moment().utcOffset('-05:00').isDST();
         if (currentDate) {
             currentDate = moment().utcOffset('-05:00').format('YYYY-MM-DD HH:mm:ss');
@@ -52,16 +45,17 @@ function AdminScreen(props) {
         setDateTimePosted(currentDate);
         
             try {
-                 fetch('https://eo9260z47k.execute-api.us-east-2.amazonaws.com/default/newaddannouncement', {
+                 fetch('https://eo9260z47k.execute-api.us-east-2.amazonaws.com/default/editAnnouncement', {
                     
                     method: 'POST',
                     headers: {
                         // Accept: 'application/json',
-                        'x-api-key': 'kezCnfAATA2cs6bHh39sg4IEXvPkfnaM220seEk2',
+                        'x-api-key': 'Ihw1k1jwsv19i9LgRDpKF2lqBeHijkJZ1f6peUMF',
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        "AnnouncementGroups": groupsBitString,
+                        "AnnouncementID": id,
+                        "Group": groupsBitString,
                         "AnnouncementTitle": title,
                         "AnnouncementDescription": details,
                         "PostedDateTime": dateTimePosted,
@@ -85,20 +79,27 @@ function AdminScreen(props) {
        
         {/* <Text style = {styles.textStyle}>My title is {title}</Text> */}
         
-
-        <Text style = {styles.textStyle}>setTitle</Text>
+        <Text style = {styles.textStyle}>Enter Announcement ID</Text>
         <TextInput 
             style={styles.textInput}
-            placeholder={'Add Annoucement Title'}
+            placeholder={'Enter Annoucement ID'}
+            onChangeText={(val)=>setID(val)}
+            keyboardType='numeric'
+        />
+
+        <Text style = {styles.textStyle}>Enter New Announcement Title</Text>
+        <TextInput 
+            style={styles.textInput}
+            placeholder={'Annoucement Title'}
             onChangeText={(val)=>setTitle(val)}
         />
 
-        <Text style = {styles.textStyle}>setDetails</Text>
+        <Text style = {styles.textStyle}>Enter New Announcement Details</Text>
         <TextInput 
             style={styles.textInput}
-            placeholder={'Add Announcement Details'}
+            placeholder={'Announcement Details'}
             onChangeText={(val)=>setDetails(val)}
-            //multiline
+            multiline
         />
 
         <Text style = {styles.textStyle}>setGroups</Text>
@@ -117,7 +118,6 @@ function AdminScreen(props) {
             
             multipleText="%d groups have been selected."
             min={0}
-
             defaultValue={groups}
             containerStyle={styles.dropDownStyle}
         />
@@ -127,7 +127,7 @@ function AdminScreen(props) {
 
 
         <View style = {styles.buttonContainer}>
-            <Button  onPress={buttonHandeler} title='submit'/>
+            <Button  onPress={buttonHandeler} title='Submit'/>
         </View>
          {/* This is where all of our content will go!*/}
         
@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-end',
         marginBottom: 36,
+        zIndex: 999,
 
         // backgroundColor:'#1E6738',
         // borderWidth: 5,
@@ -184,7 +185,7 @@ const styles = StyleSheet.create({
 
     },
     dropDownStyle:{
-        height: 40,
+        height:40,
         paddingHorizontal:8,
         margin:10,
 

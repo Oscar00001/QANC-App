@@ -1,38 +1,92 @@
 import { StatusBar } from 'expo-status-bar';
 import * as React from 'react';
-import { Button, View, StyleSheet,TouchableOpacity,Image } from 'react-native';
+import { useState,useEffect, useContext} from 'react';
+import { FlatList, Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
 
-import {Text} from "react-native";
 import Announcement from '../components/Announcement';
+import BottomBar from '../components/BottomBar';
+import TopBar from '../components/TopBar';
+import { UserContext } from '../context/UserContext';
 
-function Announcements(props) {
+
+function AnnouncementsScreen(props) {
+
+    const [data, setData] = useState();
+    const [count, setCount] = useState(0);
+    //console.log("state: " + state.data[0].title)
+    const [contextRoles,setContextRoles] = useContext(UserContext);//context is global
+    const valueContext = JSON.stringify(contextRoles)
+    //console.log('====================================');
+    //console.log(valueContext);
+    //console.log('====================================');
+    // Also can save this just using {valueContext}
+    useEffect(() => {
+        fetch('https://eo9260z47k.execute-api.us-east-2.amazonaws.com/default/getAnnouncements', {
+          method: 'GET',
+          headers: {
+              // Accept: 'application/json',
+              'x-api-key': 'kezCnfAATA2cs6bHh39sg4IEXvPkfnaM220seEk2',
+              'Content-Type': 'application/json',
+          },       
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+          //console.log(responseJson)
+          setData(responseJson)
+          let size = Object.keys(responseJson).length
+          let temp = []
+          for(let i=size-1; i>=0; i--){
+              //console.log("adding: " + responseJson[i][3])
+              //console.log(size)
+            temp[size-i-1] = {title: "("+responseJson[i][1]+") "+responseJson[i][2], text: responseJson[i][3]}
+          }
+          //console.log("temp = " + temp[3].title)
+          setData(temp)
+          
+        
+          
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+      },[]);
+    if(data){
+        //console.log("data = " + data[0].title)
+    }
+    
+
+
     return (
         <View style={styles.background}>
-            <TouchableOpacity  onPress={props.navigation.openDrawer} style={styles.topBar} activeOpacity={0.5}>
-                    <Image
-                    source={require('../assets/favicon.png')}
-                    style={null}
-                    />
-                </TouchableOpacity>
-        {/* Today's Ann*/}
-            <View style = {styles.taskWrapper}>
-                <Text style = {styles.sectionTitle}>Announcement</Text> 
-                <View style = {styles.Notitems}>
-                    {/* This is where all of our annoucements go!*/}
-                    <Announcement text = {'Accouncment 1'}/>
-                    <Announcement text = {'Accouncment 2'}/>
+            <TopBar navigation={props.navigation}/>
+
+            <View style={styles.mainContent}>
+
+                <View style = {styles.announcementsWrapper}>
+                <Text style = {styles.sectionTitle}>Announcements</Text> 
+                    
+                    <View style = {styles.announcementList}>
+   
+                        <FlatList
+                            data = {data}
+                            keyExtractor={(x, i) => i.toString()}
+                            renderItem={({item}) => <Announcement  title = {item.title} text = {item.text}/>}
+                        />
+
+                    </View>
                 </View>
             </View>
-            <Button onPress={() => props.navigation.navigate('Calendar')} title="Go to Calendar" />
+
+            <BottomBar/>
         </View>
+
         
 
     );
-}
 
-export default Announcements;
+}
+export default AnnouncementsScreen;
 
 
 const Drawer = createDrawerNavigator();
@@ -40,28 +94,24 @@ const Drawer = createDrawerNavigator();
 const styles = StyleSheet.create({
     background:{
         flex: 1,
-        //9370DB , 2d0f4c
         backgroundColor: '#2d0f4c',
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
     },
-    textStyle: {
-        color: '#f1cf5b',
-        fontSize:5,
-        textAlign: 'center',
-    },
-    taskWrapper : {
-        paddingTop: 80,
+    announcementsWrapper : {
+        paddingTop: 20,
         paddingHorizontal:20,
     },
-    sectionTitle:{
-        color: '#f1cf5b',
-        fontSize:50,
-        fontWeight: 'bold',
-    },
-    Notitems:{
+    announcementList:{
         color: '#f1cf5b',
         fontSize: 24,
     },
-    
+    sectionTitle:{
+        color: '#f1cf5b',
+        fontSize:45,
+        fontWeight: 'bold',
+    },
+    mainContent: {
+        flex: 8,
+    },
 });

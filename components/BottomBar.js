@@ -1,20 +1,24 @@
 import React from 'react'
 import {View, Text, StyleSheet, Touchable, TouchableOpacity} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 
 const BottomBar = (props) => {
+    
+    const navigation = useNavigation();
     return (
         <View style={styles.bottomBar}>
             
-                <TouchableOpacity  onPress={() => props.navigation.navigate('Calendar')} style={styles.buttonContainerStyle}>
-                    <Text style={styles.buttonTextStyle}>Button One</Text>
+                <TouchableOpacity  onPress={() => navigation.navigate('Announcement')} style={styles.buttonContainerStyle}>
+                    <Text style={styles.buttonTextStyle2}>Announcements</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity  onPress={() => props.navigation.navigate('Calendar')} style={styles.buttonContainerStyle}>
-                    <Text style={styles.buttonTextStyle}>Button Two</Text>
+                <TouchableOpacity  onPress={() => navigation.navigate('Calendar')} style={styles.buttonContainerStyle}>
+                    <Text style={styles.buttonTextStyle}>Calendar</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity  onPress={() => props.navigation.navigate('Calendar')} style={styles.buttonContainerStyle}>
-                    <Text style={styles.buttonTextStyle}>Button</Text>
+                <TouchableOpacity  onPress={() => navigation.navigate('Donations')} style={styles.buttonContainerStyle}>
+                    <Text style={styles.buttonTextStyle}>Donate</Text>
                 </TouchableOpacity>
 
             </View>
@@ -45,7 +49,7 @@ const styles = StyleSheet.create({
     bottomBar: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: '#f1cf5b',
+        backgroundColor: '#2d0f4c',
 
     },
     burgerButton: {
@@ -69,15 +73,24 @@ const styles = StyleSheet.create({
         backgroundColor: "#f1cf5b",
         borderRadius: 10,
         paddingVertical: 0,
-        paddingHorizontal: 10,
+        paddingHorizontal: 5,
         justifyContent: 'center',
         alignItems: "center",
-        borderColor: '#f1cf5b' ,
+        borderColor: '#d1af3b' ,
         borderWidth: 5,
     },
     buttonTextStyle: {
         color: '#ffffff',
         fontSize: 18,
+        alignSelf: "center",
+        
+        
+        //textAlign: 'center',
+        //fontWeight: "bold",
+    },
+    buttonTextStyle2: {
+        color: '#ffffff',
+        fontSize: 14,
         alignSelf: "center",
         
         

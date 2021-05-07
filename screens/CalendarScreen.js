@@ -1,37 +1,137 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import { Agenda} from 'react-native-calendars';
 
 import BottomBar from '../components/BottomBar';
 import TopBar from '../components/TopBar';
-
-
+import moment, * as moments from 'moment';
+import {useState} from 'react';
+import { useEffect } from 'react';
+import _ from 'lodash';
+//console.log("got here 1")
 function CalendarScreen(props) {
+    var count;
+    var response;
+    const [items,setItems] = useState({});
+    
+    //const [count, setCount] = useState([]);
+    const CALENDAR_ID = 'oscardias0001@gmail.com';
+    const API_KEY = 'AIzaSyAPOWhD56wVdK5KrvOCyA8VdCKOUstU8Kg';
+    const beginDate = moment();
+    //console.log("got here 2")
 
-    fetch('https://eo9260z47k.execute-api.us-east-2.amazonaws.com/default/getEvent', {
+    useEffect(() => {
+        //console.log("got here 3")
+        fetch(`https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}&timeMin=${beginDate.toISOString()}&maxResults=50&singleEvents=true&orderBy=startTime`, {
+          method: 'GET',
+          headers: {
+              // Accept: 'application/json',
+              'x-api-key': 'kezCnfAATA2cs6bHh39sg4IEXvPkfnaM220seEk2',
+              'Content-Type': 'application/json',
+          },       
+      })
+      
+      .then((response) => response.json())
+      .then((responseJson) => {
+          response = responseJson.items;
+          count = Object.keys(responseJson.items).length;
+          //console.log("got here 4")
+          //console.log(response)
+          
+        //   console.log("start time: " + responseJson.items[0].start.dateTime)
+        //   console.log("end time: " + responseJson.items[0].end.dateTime)
+        //setCount(responseJson.items)
+      })
+      .catch((error) => {
+          console.error(error);
+      });
+      },[]);
+     ///console.log({count});
+
+
+//      let tempDate = '';
+//      tempDate = _.map(count, 'start.dateTime');
+//      let newDate = [];
+//       //console.log(tempDate)
+//         newDate.length = 0;
+//      for (let j in tempDate) {
+//       newDate.push(
+//           tempDate[j]
+//       );
+//   }
+//   //console.log(this.newDate);
+//   console.log("out");
+//   let  output =[];
+//   let  output_2 =[];
+
+//   output = newDate.map(e=> e.substring(-1,10));
+//   console.log(output);
+//   output_2 = newDate.map(e=>e.substring(11,19));
+//   console.log(output_2);
+
+const loadItems = (day) => {
+
+    setTimeout(() => {
         
-        method: 'GET',
-        headers: {
-            // Accept: 'application/json',
-            'x-api-key': 'kezCnfAATA2cs6bHh39sg4IEXvPkfnaM220seEk2',
-            'Content-Type': 'application/json',
-        },       
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-        console.log(responseJson);
-    })
-    .catch((error) => {
-        console.error(error);
-    });
 
+        for (let i = 0; i < count; i++) {
+            //var beginDateYear = response[i][3].substring(0,4)
+            //var beginDateMonth = response[i][3].substring(5,7)
+            //var beginDateDay = response[i][3].substring(8,10)
+            // Prevoiusly we had  response.items[i]
+            var beginDate = response[i].start.dateTime.substring(0,10)
+
+            //console.log("beginDate: " + beginDate)
+            var unixtime = timeToString(moment(new Date(beginDate)));//.format('YYYY-MM-DD');
+            //console.log("unixtime: " + unixtime)
+            const time = day.timestamp + i * 24 * 60 * 60 * 1000;
+            const strTime = timeToString(time);
+            //console.log("unixtime should look like: " + strTime)
+
+            var summary = response[i].summary
+            //strTime = '2021-04-25'
+            //console.log("time = " + time)
+            //console.log("strTime = " + strTime)
+            //console.log("unixime = " + unixtime)
+            if (!items[unixtime]) {
+                items[unixtime] = [];
+                items[unixtime].push({
+                    marked: true,
+                    name: summary,//response[i][1],
+                    //description: "This is a second test"//response[i][2]
+                });
+            }
+        }
+      const newItems = {};
+      Object.keys(items).forEach(key => {
+        newItems[key] = items[key];
+      });
+      setItems(newItems);
+    }, 1000);
+}
+
+
+const timeToString = (time) => {
+    const date = new Date(time);
+    return date.toISOString().split('T')[0];
+  };
+
+  const renderItem = (item) => {
+    return (
+        <View>
+            <Text>{item.name}</Text>
+        </View>
+    );
+};
+// converting that to show that it changed it to milli. This means converting it 
+// 
     return (
         <View style={styles.background}>
             <TopBar navigation={props.navigation}/>
 
             <View style={styles.mainContent}>
                 <Agenda
-                    
+                    renderItem = {renderItem}
 
                     theme={{
                         todayTextColor: "#57B9BB",
@@ -39,22 +139,23 @@ function CalendarScreen(props) {
                         selectedDayBackgroundColor: "red",
                     }}
 
-                    items={{
-                        '2021-03-22': [{name: 'item 1 - any js object'}],
-                        '2021-03-23': [{name: 'item 2 - any js object', height: 80}],
-                        '2021-03-24': [],
-                        '2021-03-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
-                    }}
+                    items={ items}
+                    loadItemsForMonth = {loadItems} 
+                        // '2021-03-22': [{name: 'item 1 - any js object'}],
+                        // '2021-03-23': [{name: 'item 2 - any js object', height: 80}],
+                        // '2021-03-24': [],
+                        // '2021-03-25': [{name: 'item 3 - any js object'}, {name: 'any js object'}]
+                    //}
 
-                    markedDates={{
+                    // markedDates={{
                         
-                        '2021-03-22': {startingDay: true, endingDay: true, color: '#2d0f4c', textColor: '#f1cf5b'},
-                        '2021-03-23': {startingDay: true, endingDay: true, color: '#2d0f4c', textColor: '#f1cf5b'},
-                        '2021-03-24': {startingDay: true, endingDay: true, color: '#2d0f4c', textColor: '#f1cf5b'},
-                        '2021-03-28': {startingDay: true, endingDay: true, color: '#2d0f4c', textColor: '#f1cf5b'},
-                    }}
+                    //     '2021-03-22': {startingDay: true, endingDay: true, color: '#2d0f4c', textColor: '#f1cf5b'},
+                    //     '2021-03-23': {startingDay: true, endingDay: true, color: '#2d0f4c', textColor: '#f1cf5b'},
+                    //     '2021-03-24': {startingDay: true, endingDay: true, color: '#2d0f4c', textColor: '#f1cf5b'},
+                    //     '2021-03-28': {startingDay: true, endingDay: true, color: '#2d0f4c', textColor: '#f1cf5b'},
+                    // }}
 
-                    markingType={'period'}  
+                    markingType={'dot'}  
 
                 />      
             </View>
@@ -74,6 +175,7 @@ const styles = StyleSheet.create({
         flex: 8,
     },
 })
+
 
 
 

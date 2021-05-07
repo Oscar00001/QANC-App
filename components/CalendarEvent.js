@@ -1,55 +1,99 @@
 import React from 'react'
-import {View, Text, StyleSheet, Touchable, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Image,Touchable, TouchableOpacity} from 'react-native';
 
-const CalendarEvent = (props) => {
+
+const topBar = (props) => {
     return (
-        <View style = {styles.item}>
-            <View style = {styles.itemLeft}>
-                <TouchableOpacity styles = {styles.square}></TouchableOpacity>
-                <Text styles = {styles.textStyle}> {test}</Text>
+        <View style={styles.topBar}>
+            <View style={styles.burgerButton}>
+                <TouchableOpacity  onPress={props.navigation.openDrawer}  activeOpacity={0.5}>
+                    <Image
+                    source={require('../assets/burger.jpg')}
+                    style={{flex: 1, width: 60, height: 60, resizeMode: 'contain'}}
+                    />
+                </TouchableOpacity>
             </View>
+            <View style={styles.nzingaCrown}>
+                
+                <TouchableOpacity  onPress={ ()=> props.navigation.navigate('Home Page')}  activeOpacity={0.5}>
+                    <Image
+                        source={require('../assets/Crown.png')}
+                        style={{flex: 1, width: 70, height: 70, resizeMode: 'contain'}}
+                    />
+                </TouchableOpacity>
+                
+            </View>  
         </View>
     )
 }
 
 
 
-const styles = StyleSheet.create ({
+const styles = StyleSheet.create({
+    background:{
+        flex: 1,
+        backgroundColor: '#2d0f4c',
 
 
-    
-    
-    item:{
-        backgroundColor: '#FFF',
-        //color: '#f1cf5b',
-        padding:15,
-        borderRadius: 10,
-        flexDirection:'row',
-        alignItems:'center',
-        justifyContent:'space-between',
-        marginBottom:20,
     },
-    
+    topBar:{
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: '#f5f5f5',
+        paddingTop: 40,
+        //alignItems: 'center',
+        //justifyContent: 'center',
+    },
+    mainContent: {
+        flex: 8,
+
+    },
+    bottomBar: {
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: '#2d0f4c',
+
+    },
+    burgerButton: {
+        flex: 1,
+        alignItems: 'flex-start',
+        padding: 10,
+    },
+    nzingaCrown: {
+        flex: 1,
+        alignItems: 'flex-end',
+        padding: 10,
+        
+    },
     textStyle: {
         color: '#f1cf5b',
-        fontSize:12,
+        fontSize: 24,
         textAlign: 'center',
     },
-
-    itemLeft:{},
-    square:{},
-    itemText:{},
-    circular:{},
-    
-
-    
-
-    
-
+    buttonContainerStyle: {
+        flex: 1,
+        backgroundColor: "#009688",
+        borderRadius: 10,
+        paddingVertical: 0,
+        paddingHorizontal: 10,
+        justifyContent: 'center',
+        alignItems: "center",
+        borderColor: '#048074' ,
+        borderWidth: 5,
+    },
+    buttonTextStyle: {
+        color: '#ffffff',
+        fontSize: 18,
+        alignSelf: "center",
+        
+        
+        //textAlign: 'center',
+        //fontWeight: "bold",
+    },
 
     
 
 
 });
-export default CalendarEvent;
+export default topBar;
 
