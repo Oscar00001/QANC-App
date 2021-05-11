@@ -12,8 +12,8 @@ import AdminChangePassword from '../screens/AdminChangePassword';
 import DonationsScreen from '../screens/DonationsScreen';
 import HomePageScreen from '../screens/HomePageScreen';
 import AdminSignIn from '../screens/AdminSignIn';
-import EditAnnouncement from '../screens/EditAnnouncement';
-import Login from '../screens/Login';
+import EditAnnouncement from '../screens/EditAnnoucement';
+import Login from '../screens/LoginScreen';
 
 //import RoleScreen from './screens/RoleScreen';
 

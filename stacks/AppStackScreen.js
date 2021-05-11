@@ -4,9 +4,8 @@ import { UserContext } from '../context/UserContext';
 // import Demo from "../screens/DemoScreen";
 import MainStackScreens from "./MainStacksScreens";
 // import Home from "../screens/Home";
-import Login from "../screens/Login";
+import Login from "../screens/LoginScreen";
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import AdminStackScreens from "./AdminStackScreens";
 
 
 
