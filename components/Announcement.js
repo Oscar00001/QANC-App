@@ -1,9 +1,72 @@
 import React from 'react'
 import {View, Text, StyleSheet, Touchable, TouchableOpacity} from 'react-native';
+import { useContext} from 'react';
+import { UserContext } from '../context/UserContext';
 
 const Announcement = (props) => {
+
+    
+    
+    announcementStyle = function(options) {
+        const [contextRoles,setContextRoles] = useContext(UserContext);//context is global
+        const valueContext = contextRoles
+
+        let staffGroupAnnouncement = props.groups[0]
+        let parentsGroupAnnouncement = props.groups[1]
+        let participantsGroupAnnouncement = props.groups[2]
+        let honoreesGroupAnnouncement = props.groups[3]
+        let audienceGroupAnnouncement = props.groups[4]
+
+        let staffGroupUser = 0
+        let parentsGroupUser = 0
+        let participantsGroupUser = 0
+        let honoreesGroupUser = 0
+        let audienceGroupUser = 0
+
+        for(let  i=0; i<valueContext.length; i++){
+            if(valueContext[i] == "Participants"){participantsGroupUser = 1}
+            if(valueContext[i] == "Parents"){parentsGroupUser = 1}
+            if(valueContext[i] == "Audience/Community"){audienceGroupUser = 1}
+            if(valueContext[i] == "Staff"){staffGroupUser = 1}
+            if(valueContext[i] == "Women’s History Month Honorees"){honoreesGroupUser = 1}
+        }
+
+        let groupMatch = (staffGroupAnnouncement == 1 && staffGroupUser == 1 ||
+        parentsGroupAnnouncement == 1 && parentsGroupUser == 1||
+        participantsGroupAnnouncement == 1 && participantsGroupUser == 1||
+        honoreesGroupAnnouncement == 1 && honoreesGroupUser == 1||
+        audienceGroupAnnouncement == 1 && audienceGroupUser == 1)
+
+
+
+        if(groupMatch){
+            return {
+                backgroundColor: '#FbF',
+                //color: '#f1cf5b',
+                padding:10,
+                borderRadius: 10,
+                flexDirection:'column',
+                alignItems:'center',
+                justifyContent:'space-between',
+                marginBottom:20,
+            }
+        } 
+        else{
+            return {
+                backgroundColor: '#FFF',
+                //color: '#f1cf5b',
+                padding:10,
+                borderRadius: 10,
+                flexDirection:'column',
+                alignItems:'center',
+                justifyContent:'space-between',
+                marginBottom:20,
+            }
+        }
+      }
+
     return (
-        <View style = {styles.item}>
+        <View style = {announcementStyle()}>
             <View style = {styles.itemLeft}>
                 {/* <TouchableOpacity styles = {styles.square}></TouchableOpacity> */}
                 <Text style={{ fontSize: 20, fontWeight:'bold', textDecorationLine: 'underline',}}> {props.title} </Text>

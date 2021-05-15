@@ -20,7 +20,6 @@ function AdminScreen(props) {
                 
                 method: 'POST',
                 headers: {
-                    // Accept: 'application/json',
                     'x-api-key': 'Ihw1k1jwsv19i9LgRDpKF2lqBeHijkJZ1f6peUMF',
                     'Content-Type': 'application/json',
                 },
@@ -39,11 +38,7 @@ function AdminScreen(props) {
         <TopBar navigation={props.navigation}/>
         <View style={styles.mainContent}>
 
-            {/* This is where all of our content will go!*/}
 
-
-       
-        {/* <Text style = {styles.textStyle}>My title is {title}</Text> */}
         
 
         <Text style = {styles.textStyle}>Please Enter Password to sign-in</Text>

@@ -14,15 +14,13 @@ function CalendarScreen(props) {
     var response;
     const [items,setItems] = useState({});
     
-    //const [count, setCount] = useState([]);
-    const CALENDAR_ID = 'oscardias0001@gmail.com';
-    const API_KEY = 'AIzaSyAPOWhD56wVdK5KrvOCyA8VdCKOUstU8Kg';
+    const CALENDAR_ID = 'qancinc@gmail.com';
+    const API_KEY = 'AIzaSyBEzBUuhCcQ-UR0-q8oyMmSzSAJZBMHu0k';
+  
     const beginDate = moment();
-    //console.log("got here 2")
 
     useEffect(() => {
-        //console.log("got here 3")
-        fetch(`https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}&timeMin=${beginDate.toISOString()}&maxResults=50&singleEvents=true&orderBy=startTime`, {
+        fetch(`https://www.googleapis.com/calendar/v3/calendars/${CALENDAR_ID}/events?key=${API_KEY}&timeMin=${beginDate.toISOString()}&maxResults=45&singleEvents=true&orderBy=startTime`, {
           method: 'GET',
           headers: {
               // Accept: 'application/json',
@@ -35,39 +33,13 @@ function CalendarScreen(props) {
       .then((responseJson) => {
           response = responseJson.items;
           count = Object.keys(responseJson.items).length;
-          //console.log("got here 4")
-          //console.log(response)
-          
-        //   console.log("start time: " + responseJson.items[0].start.dateTime)
-        //   console.log("end time: " + responseJson.items[0].end.dateTime)
-        //setCount(responseJson.items)
+  
       })
       .catch((error) => {
           console.error(error);
       });
       },[]);
-     ///console.log({count});
 
-
-//      let tempDate = '';
-//      tempDate = _.map(count, 'start.dateTime');
-//      let newDate = [];
-//       //console.log(tempDate)
-//         newDate.length = 0;
-//      for (let j in tempDate) {
-//       newDate.push(
-//           tempDate[j]
-//       );
-//   }
-//   //console.log(this.newDate);
-//   console.log("out");
-//   let  output =[];
-//   let  output_2 =[];
-
-//   output = newDate.map(e=> e.substring(-1,10));
-//   console.log(output);
-//   output_2 = newDate.map(e=>e.substring(11,19));
-//   console.log(output_2);
 
 const loadItems = (day) => {
 

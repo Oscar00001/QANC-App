@@ -9,7 +9,7 @@ const BottomBar = (props) => {
     return (
         <View style={styles.bottomBar}>
             
-                <TouchableOpacity  onPress={() => navigation.navigate('Announcement')} style={styles.buttonContainerStyle}>
+                <TouchableOpacity  onPress={() => navigation.navigate('Announcement Screen')} style={styles.buttonContainerStyle}>
                     <Text style={styles.buttonTextStyle2}>Announcements</Text>
                 </TouchableOpacity>
 

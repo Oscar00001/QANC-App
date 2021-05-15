@@ -2,7 +2,9 @@ import * as React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 
-import Announcement from '../screens/Announcement';
+//import Announcement from '../screens/Announcement';
+import AnnouncementScreen from '../screens/AnnouncementsScreen';
+
 import CalendarScreen from '../screens/CalendarScreen';
 //import CalendarTestingScreen from '../screens/CalendarTesting';
 //import BlankPageTemplateScreen from './screens/BlankPageTemplateScreen';
@@ -27,14 +29,15 @@ export default  MainStackScreens = () =>  {
     //   {/* <Drawer.Navigator initialRouteName="Home Page"> */}
       <Drawer.Navigator >
         <Drawer.Screen name="Home Page" component={HomePageScreen} />
-        <Drawer.Screen name="Announcement" component={Announcement} />
-        <Drawer.Screen name="Calendar" component={CalendarScreen} />
-        <Drawer.Screen name="Donations" component={DonationsScreen} />
-        <Drawer.Screen name="Roles" component={Login} />
-        <Drawer.Screen name="AdminSignIn" component={AdminSignIn} />
-        <Drawer.Screen name="AddAnnouncement" component={AdminScreen} />
-        <Drawer.Screen name="EditAnnouncement" component={EditAnnouncement} />
-        <Drawer.Screen name="ChangePassword" component={AdminChangePassword} />
+        <Drawer.Screen name="Announcement Page" component={AnnouncementScreen} />
+        <Drawer.Screen name="Calendar Page" component={CalendarScreen} />
+        <Drawer.Screen name="Donations Page " component={DonationsScreen} />
+        <Drawer.Screen name="Group Page" component={Login} />
+        <Drawer.Screen name="Admin SignIn" component={AdminSignIn} />
+        <Drawer.Screen name="Admin Page" component={AdminScreen} />
+        <Drawer.Screen name="Edit Announcement" component={EditAnnouncement} />
+        <Drawer.Screen name="Admin Change Password" component={AdminChangePassword} />
+
 
         {/* <Drawer.Screen name="Role screen" component={RoleScreen} />      */}
 

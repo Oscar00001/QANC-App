@@ -40,8 +40,7 @@ const styles = StyleSheet.create({
     mainContent: {
         flex: 8,
         alignItems: 'center',
-        //paddingTop: 20,
-        //paddingHorizontal:20,
+
     },
     sectionTitle:{
         color: '#f1cf5b',

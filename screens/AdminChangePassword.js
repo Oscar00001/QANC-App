@@ -49,26 +49,15 @@ function AdminScreen(props) {
         <View style={styles.background}>
         <TopBar navigation={props.navigation}/>
         <View style={styles.mainContent}>
-
-            {/* This is where all of our content will go!*/}
-
-
-       
-        {/* <Text style = {styles.textStyle}>My title is {title}</Text> */}
-        
-
         <Text style = {styles.textStyle}>Please Enter New Password</Text>
         <TextInput 
             style={styles.textInput}
             placeholder={'Password1234'}
             onChangeText={(val)=>setPass(val)}
         />
-
         <View style = {styles.buttonContainer}>
             <Button  onPress={buttonHandeler} title='submit'/>
-        </View>
-         {/* This is where all of our content will go!*/}
-        
+        </View>        
         </View>
         <BottomBar navigation={props.navigation}/>
     </View>
@@ -95,7 +84,6 @@ const styles = StyleSheet.create({
         padding:8,
         margin:10,
         alignItems: 'stretch',
-        //width: {screenWidth} ,    
     },
 
     textStyle:{
@@ -111,14 +99,9 @@ const styles = StyleSheet.create({
         borderRadius:10,
         padding: 20,
         margin: 0,
-        // alignSelf: 'flex-end',
         flex: 1,
         justifyContent: 'flex-end',
-        marginBottom: 36,
-
-        // backgroundColor:'#1E6738',
-        // borderWidth: 5,
-        // borderRadius: 15,   
+        marginBottom: 36, 
 
     },
     dropDownStyle:{
