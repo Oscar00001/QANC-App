@@ -9,15 +9,15 @@ const BottomBar = (props) => {
     return (
         <View style={styles.bottomBar}>
             
-                <TouchableOpacity  onPress={() => navigation.navigate('Announcement Screen')} style={styles.buttonContainerStyle}>
+                <TouchableOpacity  onPress={() => navigation.navigate('Announcement Page')} style={styles.buttonContainerStyle}>
                     <Text style={styles.buttonTextStyle2}>Announcements</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity  onPress={() => navigation.navigate('Calendar')} style={styles.buttonContainerStyle}>
+                <TouchableOpacity  onPress={() => navigation.navigate('Calendar Page')} style={styles.buttonContainerStyle}>
                     <Text style={styles.buttonTextStyle}>Calendar</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity  onPress={() => navigation.navigate('Donations')} style={styles.buttonContainerStyle}>
+                <TouchableOpacity  onPress={() => navigation.navigate('Donations Page')} style={styles.buttonContainerStyle}>
                     <Text style={styles.buttonTextStyle}>Donate</Text>
                 </TouchableOpacity>
 
