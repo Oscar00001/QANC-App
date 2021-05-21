@@ -60,32 +60,32 @@ const customDrawerContent = (props) => {
               <DrawerContentScrollView {...props}>
               <TouchableOpacity 
                style={styles.contactUsContainer} 
-                onPress={() => { console.log(props.navigation.navigate('Home Page'))}}>
+                onPress={() => {(props.navigation.navigate('Home Page'))}}>
                 <Text style={styles.drawerText}>Home Page</Text>                    
               </TouchableOpacity>
               <TouchableOpacity 
                 style={styles.contactUsContainer} 
-                onPress={() => { console.log(props.navigation.navigate('Announcement Page'))}}>
+                onPress={() => {(props.navigation.navigate('Announcement Page'))}}>
                 <Text style={styles.drawerText}>Announcement Page</Text>                    
               </TouchableOpacity>
               <TouchableOpacity 
                 style={styles.contactUsContainer} 
-                onPress={() => { console.log(props.navigation.navigate('Calendar Page'))}}>
+                onPress={() => { (props.navigation.navigate('Calendar Page'))}}>
                 <Text style={styles.drawerText}>Calendar Page</Text>                    
               </TouchableOpacity>
               <TouchableOpacity 
                 style={styles.contactUsContainer} 
-                onPress={() => { console.log(props.navigation.navigate('Donations Page'))}}>
+                onPress={() => {(props.navigation.navigate('Donations Page'))}}>
                 <Text style={styles.drawerText}>Donations Page</Text>                    
               </TouchableOpacity>
               <TouchableOpacity 
                 style={styles.contactUsContainer} 
-                onPress={() => { console.log(props.navigation.navigate('Admin SignIn'))}}>
+                onPress={() => {(props.navigation.navigate('Admin SignIn'))}}>
                 <Text style={styles.drawerText}>Admin SignIn</Text>                    
               </TouchableOpacity>
               <TouchableOpacity 
                 style={styles.contactUsContainer} 
-                onPress={() => { console.log(props.navigation.navigate('Role Page'))}}>
+                onPress={() => {(props.navigation.navigate('Role Page'))}}>
                 <Text style={styles.drawerText}>Roles</Text>                    
               </TouchableOpacity>
               </DrawerContentScrollView>

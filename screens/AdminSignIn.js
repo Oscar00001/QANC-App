@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/Feather';
 
 import { useNavigation } from '@react-navigation/native';
 
-/*Bryan Doucette
+/*Bryan Doucette & Oscar Dias :)
 Sign in page for lambda
 */
 const screenWidth = Dimensions.get('window').width;
@@ -35,16 +35,14 @@ function AdminScreen(props) {
             //If response is in json then in success
             .then((responseJson) => {
                 //Success
+                if (responseJson == "Correct Password!"){
+                    navigation.navigate('Admin Page'); // code we need 
+                }
                 alert(JSON.stringify(responseJson));
-                console.log(responseJson);
-                navigation.navigate('Admin Page'); // code we need 
-
             })
         } catch (e) {
             alert(JSON.stringify(error));
-            console.error(error);
         }
-        
     }
     return (
         <View style={styles.background}>

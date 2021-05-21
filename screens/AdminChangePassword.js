@@ -8,7 +8,7 @@ import moment from 'moment';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Icon from 'react-native-vector-icons/Feather';
 import AdminBottomBar from '../components/AdminBottomBar';
-
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -60,7 +60,8 @@ function AdminScreen(props) {
             <Button  onPress={buttonHandeler} title='submit'/>
         </View>        
         </View>
-        <AdminBottomBar navigation={props.navigation}/>
+        {/* <AdminBottomBar navigation={props.navigation}/> */}
+        <AdminBottomBar/>
     </View>
     );
 }export default AdminScreen;

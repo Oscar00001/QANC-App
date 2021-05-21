@@ -136,7 +136,8 @@ function AdminScreen(props) {
         
         </View>
         {/* <AdminBottomBar navigation={props.navigation}/> */}
-        <AdminBottomBar navigation={props.navigation}/>
+        {/* <AdminBottomBar navigation={props.navigation}/> */}
+        <AdminBottomBar/>
     </View>
     );
 }export default AdminScreen;
