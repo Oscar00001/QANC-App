@@ -7,6 +7,7 @@ import TopBar from '../components/TopBar';
 import moment from 'moment';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Icon from 'react-native-vector-icons/Feather';
+import AdminBottomBar from '../components/AdminBottomBar';
 
 
 
@@ -59,7 +60,7 @@ function AdminScreen(props) {
             <Button  onPress={buttonHandeler} title='submit'/>
         </View>        
         </View>
-        <BottomBar navigation={props.navigation}/>
+        <AdminBottomBar navigation={props.navigation}/>
     </View>
     );
 }export default AdminScreen;

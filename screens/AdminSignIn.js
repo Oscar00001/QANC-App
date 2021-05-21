@@ -7,29 +7,42 @@ import TopBar from '../components/TopBar';
 import moment from 'moment';
 import Icon from 'react-native-vector-icons/Feather';
 
+import { useNavigation } from '@react-navigation/native';
 
+/*Bryan Doucette
+Sign in page for lambda
+*/
 const screenWidth = Dimensions.get('window').width;
 
 function AdminScreen(props) {
-
-
+    const [password, setPassword] = useState('default')
+    const navigation = useNavigation();
     const buttonHandeler = () => {
 
         try {
                 fetch('https://eo9260z47k.execute-api.us-east-2.amazonaws.com/default/adminTrigger', {
-                
                 method: 'POST',
                 headers: {
+                    // Accept: 'application/json',
                     'x-api-key': 'Ihw1k1jwsv19i9LgRDpKF2lqBeHijkJZ1f6peUMF',
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    "keyword": "testfromapp1"
+                    "keyword": password,
                 })
             })
+            .then((response) => response.json())
+            //If response is in json then in success
+            .then((responseJson) => {
+                //Success
+                alert(JSON.stringify(responseJson));
+                console.log(responseJson);
+                navigation.navigate('Admin Page'); // code we need 
+
+            })
         } catch (e) {
-            console.log(e)
-            throw(e)
+            alert(JSON.stringify(error));
+            console.error(error);
         }
         
     }
@@ -38,14 +51,18 @@ function AdminScreen(props) {
         <TopBar navigation={props.navigation}/>
         <View style={styles.mainContent}>
 
+            {/* This is where all of our content will go!*/}
 
+
+       
+        {/* <Text style = {styles.textStyle}>My title is {title}</Text> */}
         
 
         <Text style = {styles.textStyle}>Please Enter Password to sign-in</Text>
         <TextInput 
             style={styles.textInput}
             placeholder={'Password1234'}
-            onChangeText={(val)=>setTitle(val)}
+            onChangeText={(val)=>setPassword(val)}
         />
 
         <View style = {styles.buttonContainer}>
@@ -58,7 +75,6 @@ function AdminScreen(props) {
     </View>
     );
 }export default AdminScreen;
-
 
 
 const styles = StyleSheet.create({

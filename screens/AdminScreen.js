@@ -7,6 +7,8 @@ import TopBar from '../components/TopBar';
 import moment from 'moment';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Icon from 'react-native-vector-icons/Feather';
+import AdminBottomBar from '../components/AdminBottomBar';
+import { useNavigation } from '@react-navigation/native';
 
 
 
@@ -27,7 +29,8 @@ function AdminScreen(props) {
     const [dateTimePosted, setDateTimePosted] = useState('default');
     let groupsString = [0,0,0,0,0]
     let groupsBits = [0,0,0,0,0]
-    
+    const navigation = useNavigation();
+
 
     
     
@@ -132,7 +135,8 @@ function AdminScreen(props) {
          {/* This is where all of our content will go!*/}
         
         </View>
-        <BottomBar navigation={props.navigation}/>
+        {/* <AdminBottomBar navigation={props.navigation}/> */}
+        <AdminBottomBar navigation={props.navigation}/>
     </View>
     );
 }export default AdminScreen;
