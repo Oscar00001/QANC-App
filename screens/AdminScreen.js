@@ -5,12 +5,13 @@ import {View, StyleSheet, Text, Button, TextInput, Dimensions} from 'react-nativ
 import BottomBar from '../components/BottomBar';
 import TopBar from '../components/TopBar';
 import moment from 'moment';
-import DropDownPicker from 'react-native-dropdown-picker';
+import DropDownPicker from 'react-native-dropdown-picker';//npm install react-native-dropdown-picker
+
 import Icon from 'react-native-vector-icons/Feather';
 import AdminBottomBar from '../components/AdminBottomBar';
 import { useNavigation } from '@react-navigation/native';
 
-
+import vector from 'react-native-vector-icons';
 
 
 const screenWidth = Dimensions.get('window').width;
@@ -81,7 +82,7 @@ function AdminScreen(props) {
         <View style={styles.background}>
         <TopBar navigation={props.navigation}/>
         <View style={styles.mainContent}>
-
+        <Text style = {styles.textStyle2}>Edit Announcement</Text>
             {/* This is where all of our content will go!*/}
 
 
@@ -106,6 +107,14 @@ function AdminScreen(props) {
 
         <Text style = {styles.textStyle}>setGroups</Text>
         <DropDownPicker
+            // dropDownDirection="TOP"
+            // onOpen={() => open = {true}}
+            multiple={true}
+//                <TouchableOpacity  onPress={() => navigation.navigate('Calendar Page')} style={styles.buttonContainerStyle}>
+
+            // multiple={true}
+            // min={0}
+            // max={5}
             onChangeItem={(value) => groupsString = value}
             items={[
                     {label: 'Staff', value: 'staff', icon: () => <Icon name="flag" size={18} color="#900" />},
@@ -115,16 +124,23 @@ function AdminScreen(props) {
                     {label: 'Audience/Community Members', value: 'community', icon: () => <Icon name="flag" size={18} color="#900" />},
 
                 ]}
+                // showArrowIcon={true}
             placeholder="Select your groups"
-            multiple={true}
-            
+            // multiple={true}
+            open= {false}
             multipleText="%d groups have been selected."
             min={0}
 
             defaultValue={groups}
             containerStyle={styles.dropDownStyle}
         />
-       
+       {/* <Picker
+  selectedValue={this.state.language}
+  style={{ height: 50, width: 100 }}
+  onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
+  <Picker.Item label="Java" value="java" />
+  <Picker.Item label="JavaScript" value="js" />
+</Picker> */}
 
         
 
@@ -152,6 +168,14 @@ const styles = StyleSheet.create({
     mainContent: {
         flex: 8,
         
+    },
+    textStyle2:{
+        color: '#f1cf5b',
+        paddingHorizontal:10,
+        paddingTop: 10,
+        margin:2,
+        fontSize:30,
+        textAlign: 'center',
     },
 
     textInput: {

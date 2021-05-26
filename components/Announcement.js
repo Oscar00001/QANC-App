@@ -41,7 +41,7 @@ const Announcement = (props) => {
 
         if(groupMatch){
             return {
-                backgroundColor: '#FbF',
+                backgroundColor: '#b57de3',
                 //color: '#f1cf5b',
                 padding:10,
                 borderRadius: 10,
