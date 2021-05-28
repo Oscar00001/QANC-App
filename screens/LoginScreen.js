@@ -6,19 +6,63 @@ import TopBar from '../components/TopBar';
 export default Login = (props) => {
 
     const [roles,setRoles] = useState([]);
-
-    let count =0;
     const [contextRoles,setContextRoles] = useContext(UserContext);//context is global
 
+    const [buttonOne,setButtonOne] = useState(0);//context is global
+    const [buttonTwo,setButtonTwo] = useState(0);//context is global
+    const [buttonThree,setButtonThree] = useState(0);//context is global
+    const [buttonFour,setButtonFour] = useState(0);//context is global
+    const [buttonFive,setButtonFive] = useState(0);//context is global
+
+
+
+    function App() {
+      useEffect(() => {
+        let len = contextRoles.length
+        
+        for(let i = 0; i<len; i++){
+          if(contextRoles[i] == "Participants"){setButtonOne(1)}
+          else if(contextRoles[i] == "Staff"){setButtonTwo(1)}
+          else if(contextRoles[i] == "Parents"){setButtonThree(1)}
+          else if(contextRoles[i] == "Women’s History Month Honorees"){setButtonFour(1)}
+          else if(contextRoles[i] == "Audience/Community"){setButtonFive(1)}
+          else{console.log("Impossible role!\n" + contextRoles[i])}
+        }
+      }, []);
+    } 
+    App()
     
-    const addRole =(role) => {
+
+    
+    const addRole = (role) => {
       const currentRoles = roles
       currentRoles.push(role)
       setRoles(currentRoles)
+
+     
+      
+      if(role == "Participants"){setButtonOne(1)}
+      else if(role == "Staff"){setButtonTwo(1)}
+      else if(role == "Parents"){setButtonThree(1)}
+      else if(role == "Women’s History Month Honorees"){setButtonFour(1)}
+      else if(role == "Audience/Community"){setButtonFive(1)}
+      else{console.log("Impossible role")}
+ 
+        
+      
     }
   
     
     const save = async () => {
+      const currentRoles = roles
+      
+      let len = contextRoles.length
+      for(let i=0; i<len; i++){
+        currentRoles.push(contextRoles[i])
+      }
+      
+
+      setRoles(currentRoles)
       try { 
         const value = JSON.stringify(roles)
         await AsyncStorage.setItem("Roles", value); 
@@ -34,124 +78,101 @@ export default Login = (props) => {
         await AsyncStorage.removeItem("Roles")
       } 
       catch (err) {
-        
       }
+        
+      setButtonOne(0)
+      setButtonTwo(0)
+      setButtonThree(0)
+      setButtonFour(0)
+      setButtonFive(0)
+      setContextRoles(roles);
     };
-    
+
   
   // Set this up to another Screen  and the useEffect 
-  let b1 = 0
-  let b2 = 0
-  let b3 = 0
-  let b4 = 0
-  let b5 = 0
+  
+
+
 
   
   
   const b1Style = function(options) {
-
-    for(let  i=0; i<roles.length; i++){
-      if(roles[i] == "Participants"){b1 = 1}
-    }
-    if(b1 == 1){
-        return {
-          backgroundColor: '#b79100',//f1cf5b // CD6012 
-          marginHorizontal: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 50,
-          borderWidth: 4,
-          borderColor: '#5d57ff', // 5d57ff
-          width: '70%',
-          height: '5%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          flex: 0,
-          margin: 5,
-      }
-    } 
-    else{
-        return {
-          backgroundColor: '#E7B128',//f1cf5b // CD6012 
-          marginHorizontal: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 50,
-          borderWidth: 4,
-          borderColor: '#5d57ff', // 5d57ff
-          width: '70%',
-          height: '5%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          flexDirection: 'column',
-          flex: 0,
-          margin: 5,
-        }//f1cf5b // CD6012 
-    }
+    if(buttonOne == 0){return styles.loginButtonSection} 
+    else{return styles.loginButtonSection2}
+  }
+  const b2Style = function(options) {
+    if(buttonTwo == 0){return styles.loginButtonSection} 
+    else{return styles.loginButtonSection2}
+  }
+  const b3Style = function(options) {
+    if(buttonThree == 0){return styles.loginButtonSection} 
+    else{return styles.loginButtonSection2}
+  }
+  const b4Style = function(options) {
+    if(buttonFour == 0){return styles.loginButtonSection} 
+    else{return styles.loginButtonSection2}
+  }
+  const b5Style = function(options) {
+    if(buttonFive == 0){return styles.loginButtonSection} 
+    else{return styles.loginButtonSection2}
   }
     
     return (
         <View style={styles.container}>
           <TopBar navigation={props.navigation}/>
-
-
           <View style = {styles.mainContent}>
-<View style = {styles.logoContainer}>
-            <Image
-              style={styles.logo}
-              source={require('../assets/Crown.png')}
-            />
-            <Text style={styles.logoText}>Welcome, Please Pick A Group</Text>
-          </View>
+            
+            <View style = {styles.logoContainer}>
+              <Image
+                style={styles.logo}
+                source={require('../assets/Crown.png')}
+              />
+              <Text style={styles.logoText}>Welcome, Please Pick A Group</Text>
+            </View>
 
-          <View style= {styles.loginButtonSection}>
+            <View style= {b1Style()}>
               <TouchableOpacity onPress = {() => addRole("Participants") }>
                 <Text style = {styles.buttonText}>Participants</Text>
               </TouchableOpacity>
-          </View>
+            </View>
 
-          <View style= {styles.loginButtonSection}>
-            <TouchableOpacity onPress = {() => addRole("Staff") }>
-              <Text style = {styles.buttonText}>Staff</Text>
+            <View style= {b2Style()}>
+              <TouchableOpacity onPress = {() => addRole("Staff") }>
+                <Text style = {styles.buttonText}>Staff</Text>
+              </TouchableOpacity>
+            </View>
+
+          <View style= {b3Style()}>
+            <TouchableOpacity onPress = {() => addRole("Parents") }>
+              <Text style = {styles.buttonText}>Parents</Text>
             </TouchableOpacity>
           </View>
 
-        <View style= {styles.loginButtonSection}>
-          <TouchableOpacity onPress = {() => addRole("Parents") }>
-            <Text style = {styles.buttonText}>Parents</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style= {styles.loginButtonSection}>
-          <TouchableOpacity onPress = {() => addRole("Women’s History Month Honorees") }>
-            <Text style = {styles.buttonText}>Women’s History Month Honorees</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style= {styles.loginButtonSection}>
-          <TouchableOpacity onPress = {() => addRole("Audience/Community") }>
-            <Text style = {styles.buttonText}>Audience/Community</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style= {styles.loginButtonSection}>
-          <TouchableOpacity onPress = {() => save() }>
-            <Text style = {styles.buttonText}>Save Role</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style= {styles.loginButtonSection}>
-          <TouchableOpacity onPress = {() => remove() }>
-            <Text style = {styles.buttonText}>Reset Role</Text>
-          </TouchableOpacity>
-        </View>
+          <View style= {b4Style()}>
+            <TouchableOpacity onPress = {() => addRole("Women’s History Month Honorees") }>
+              <Text style = {styles.buttonText}>Women’s History Month Honorees</Text>
+            </TouchableOpacity>
           </View>
-         
-          
-         
-         
-    
+
+          <View style= {b5Style()}>
+            <TouchableOpacity onPress = {() => addRole("Audience/Community") }>
+              <Text style = {styles.buttonText}>Audience/Community</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style= {styles.loginButtonSection}>
+            <TouchableOpacity onPress = {() => save() }>
+              <Text style = {styles.buttonText}>Save Role</Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style= {styles.loginButtonSection}>
+            <TouchableOpacity onPress = {() => remove() }>
+              <Text style = {styles.buttonText}>Reset Role</Text>
+            </TouchableOpacity>
+          </View>
+
+        </View>
       </View>
     );
 };
@@ -164,7 +185,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#2d0f4c',
     },
     loginButtonSection: {
-
+      backgroundColor: '#E7B128',
       marginHorizontal: 10,
       justifyContent: 'center',
       alignItems: 'center',
@@ -172,16 +193,29 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       borderRadius: 50,
       borderWidth: 4,
-      borderColor: '#5d57ff', // 5d57ff
+      borderColor: '#5d57ff',
       //width: '70%',
       height: '5%',
-      
-      backgroundColor: '#E7B128',//f1cf5b // CD6012 
       flexDirection: 'column',
       flex: 1,
-      margin: 5,
-      
+      margin: 5, 
    },
+   loginButtonSection2: {
+    backgroundColor: '#B1E728',
+    marginHorizontal: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+    borderWidth: 4,
+    borderColor: '#5d57ff',
+    //width: '70%',
+    height: '5%',
+    flexDirection: 'column',
+    flex: 1,
+    margin: 5, 
+ },
    logoContainer:{
      alignItems:'center',
     //  flexGrow:1,
