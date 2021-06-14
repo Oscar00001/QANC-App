@@ -34,7 +34,7 @@ function AnnouncementsScreen(props) {
           let temp = []
           for(let i=size-1; i>=0; i--){
 
-            temp[size-i-1] = {title: "("+responseJson[i][1]+") "+responseJson[i][2], text: responseJson[i][3], groups: responseJson[i][0]}
+            temp[size-i-1] = {title: responseJson[i][2], text: responseJson[i][3], groups: responseJson[i][0]}
           }
           setData(temp)
           
@@ -61,7 +61,7 @@ function AnnouncementsScreen(props) {
                     
                     <View style = {styles.announcementList}>
    
-                        <FlatList
+                        <FlatList 
                             data = {data}
                             keyExtractor={(x, i) => i.toString()}
                             renderItem={({item}) => <Announcement  title = {item.title} text = {item.text} groups= {item.groups}/>}
@@ -96,6 +96,7 @@ const styles = StyleSheet.create({
         paddingHorizontal:20,
     },
     announcementList:{
+        flex: 1,
         color: '#f1cf5b',
         fontSize: 24,
     },

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {View, StyleSheet, Text, Button, TextInput, Dimensions} from 'react-native';
 
 import BottomBar from '../components/BottomBar';
@@ -23,7 +23,7 @@ function AdminScreen(props) {
     //     console.log(responseJson);
     // })
 
-
+    const [PhoneIDs, setPhoneIDs] = useState([]);
     const [groups, setGroups] = useState('default')
     const [title, setTitle] = useState('default');
     const [details, setDetails] = useState('default');
@@ -33,10 +33,78 @@ function AdminScreen(props) {
     const navigation = useNavigation();
 
 
+    const printPhoneIDs = () => {
+        console.log(PhoneIDs)
+    }
     
     
     const buttonHandeler = () => {
+        
+        let temp = []
 
+
+        /////////////////////////////
+        ///// Get all Phone IDs /////
+        /////////////////////////////
+        try {
+            fetch('https://eo9260z47k.execute-api.us-east-2.amazonaws.com/default/phoneTrigger', {
+            method: 'GET',
+            headers: {
+                // Accept: 'application/json',
+                'x-api-key': '5kvvjIHoeq9ZMcMrBtQzFaPcULiq8g9D8Biki7vp',
+                'Content-Type': 'application/json',
+            },
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            let size = Object.keys(responseJson).length
+            for(let i=0; i<size; i++){
+                temp[i] = responseJson[i][0]
+            }
+
+            //setPhoneIDs(temp)
+            console.log('size = ' + size)
+
+            for(let i=0;i<size;i+=100){
+
+                let somePhoneIDs = temp.slice(i,i+99)
+
+                ////////////////////////////////////////////
+                ///// POST to push notification server /////
+                ////////////////////////////////////////////
+                fetch('https://exp.host/--/api/v2/push/send', {
+                    method: 'POST',
+                    headers: {
+
+                        'host': 'exp.host',
+                        'accept': 'application/json',
+                        'accept-encoding': 'gzip, deflate',
+                        'content-type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "to": somePhoneIDs, //make this a sub-array of only 100 objects
+                        "sound": "default", //IOS only
+                        "body": "New Announcement: " + title + ".\n" + details,
+                    })
+                })
+            }
+
+
+
+            
+        })
+        } catch (e) {
+            alert(JSON.stringify(error));
+        }
+
+       
+        
+
+
+    
+        //////////////////////////
+        ///// Set Group bits /////
+        //////////////////////////
         for(let i=0;i<groupsString.length;i++){
             if(groupsString[i] == "staff"){groupsBits[0] = 1}
             if(groupsString[i] == "parents"){groupsBits[1] = 1}
@@ -46,6 +114,9 @@ function AdminScreen(props) {
         }
         let groupsBitString = "" + groupsBits[0] + groupsBits[1] + groupsBits[2] + groupsBits[3] + groupsBits[4]
 
+        ///////////////////////////////
+        ///// Set DateTime Posted /////
+        ///////////////////////////////
         var currentDate = moment().utcOffset('-05:00').isDST();
         if (currentDate) {
             currentDate = moment().utcOffset('-05:00').format('YYYY-MM-DD HH:mm:ss');
@@ -55,106 +126,77 @@ function AdminScreen(props) {
         }
         setDateTimePosted(currentDate);
         
-            try {
-                 fetch('https://eo9260z47k.execute-api.us-east-2.amazonaws.com/default/newaddannouncement', {
-                    
-                    method: 'POST',
-                    headers: {
-                        // Accept: 'application/json',
-                        'x-api-key': 'kezCnfAATA2cs6bHh39sg4IEXvPkfnaM220seEk2',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        "AnnouncementGroups": groupsBitString,
-                        "AnnouncementTitle": title,
-                        "AnnouncementDescription": details,
-                        "PostedDateTime": dateTimePosted,
-                    })
-                
+        //////////////////////////////////////////////
+        ///// Add new announcement to the server /////
+        //////////////////////////////////////////////
+        try {
+            fetch('https://eo9260z47k.execute-api.us-east-2.amazonaws.com/default/newaddannouncement', {
+            method: 'POST',
+            headers: {
+                // Accept: 'application/json',
+                'x-api-key': 'kezCnfAATA2cs6bHh39sg4IEXvPkfnaM220seEk2',
+                'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    "AnnouncementGroups": groupsBitString,
+                    "AnnouncementTitle": title,
+                    "AnnouncementDescription": details,
+                    "PostedDateTime": dateTimePosted,
                 })
-            } catch (e) {
-                console.log(e)
-                throw(e)
-            }
+            })
+        } catch (e) {
+            console.log(e)
+            throw(e)
+        }
         
     }
     return (
         <View style={styles.background}>
-        <TopBar navigation={props.navigation}/>
-        <View style={styles.mainContent}>
-        <Text style = {styles.textStyle2}>Edit Announcement</Text>
-            {/* This is where all of our content will go!*/}
+            <TopBar navigation={props.navigation}/>
+            <View style={styles.mainContent}>
+                <Text style = {styles.textStyle2}>Add Announcement</Text>
 
+                <Text style = {styles.textStyle}>setTitle</Text>
+                <TextInput 
+                    style={styles.textInput}
+                    placeholder={'Add Annoucement Title'}
+                    onChangeText={(val)=>setTitle(val)}
+                />
 
-       
-        {/* <Text style = {styles.textStyle}>My title is {title}</Text> */}
-        
+                <Text style = {styles.textStyle}>setDetails</Text>
+                <TextInput 
+                    style={styles.textInput}
+                    placeholder={'Add Announcement Details'}
+                    onChangeText={(val)=>setDetails(val)}
+                    //multiline
+                />
 
-        <Text style = {styles.textStyle}>setTitle</Text>
-        <TextInput 
-            style={styles.textInput}
-            placeholder={'Add Annoucement Title'}
-            onChangeText={(val)=>setTitle(val)}
-        />
+                <Text style = {styles.textStyle}>setGroups</Text>
+                <DropDownPicker
+                        onChangeItem={(value) => groupsString = value}
+                        items={[
+                                {label: 'Staff', value: 'staff', icon: () => <Icon name="flag" size={18} color="#900" />},
+                                {label: 'Parents', value: 'parents', icon: () => <Icon name="flag" size={18} color="#900" />},
+                                {label: 'Participants', value: 'participants', icon: () => <Icon name="flag" size={18} color="#900" />},
+                                {label: 'Women’s History Month Honorees', value: 'honorees', icon: () => <Icon name="flag" size={18} color="#900" />},
+                                {label: 'Audience/Community Members', value: 'community', icon: () => <Icon name="flag" size={18} color="#900" />},
 
-        <Text style = {styles.textStyle}>setDetails</Text>
-        <TextInput 
-            style={styles.textInput}
-            placeholder={'Add Announcement Details'}
-            onChangeText={(val)=>setDetails(val)}
-            //multiline
-        />
+                            ]}
+                        placeholder="Select your groups"
+                        multiple={true}
+                        
+                        multipleText="%d groups have been selected."
+                        min={0}
+                        defaultValue={groups}
+                        containerStyle={styles.dropDownStyle}
+                    />
 
-        <Text style = {styles.textStyle}>setGroups</Text>
-        <DropDownPicker
-            // dropDownDirection="TOP"
-            // onOpen={() => open = {true}}
-            multiple={true}
-//                <TouchableOpacity  onPress={() => navigation.navigate('Calendar Page')} style={styles.buttonContainerStyle}>
-
-            // multiple={true}
-            // min={0}
-            // max={5}
-            onChangeItem={(value) => groupsString = value}
-            items={[
-                    {label: 'Staff', value: 'staff', icon: () => <Icon name="flag" size={18} color="#900" />},
-                    {label: 'Parents', value: 'parents', icon: () => <Icon name="flag" size={18} color="#900" />},
-                    {label: 'Participants', value: 'participants', icon: () => <Icon name="flag" size={18} color="#900" />},
-                    {label: 'Women’s History Month Honorees', value: 'honorees', icon: () => <Icon name="flag" size={18} color="#900" />},
-                    {label: 'Audience/Community Members', value: 'community', icon: () => <Icon name="flag" size={18} color="#900" />},
-
-                ]}
-                // showArrowIcon={true}
-            placeholder="Select your groups"
-            // multiple={true}
-            open= {false}
-            multipleText="%d groups have been selected."
-            min={0}
-
-            defaultValue={groups}
-            containerStyle={styles.dropDownStyle}
-        />
-       {/* <Picker
-  selectedValue={this.state.language}
-  style={{ height: 50, width: 100 }}
-  onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
-  <Picker.Item label="Java" value="java" />
-  <Picker.Item label="JavaScript" value="js" />
-</Picker> */}
-
-        
-
-
-        <View style = {styles.buttonContainer}>
-            <Button  onPress={buttonHandeler} title='submit'/>
+                <View style = {styles.buttonContainer}>
+                    <Button  onPress={buttonHandeler} title='Submit'/>
+                </View>
+            </View>
+            <AdminBottomBar/>
         </View>
-         {/* This is where all of our content will go!*/}
-        
-        </View>
-        {/* <AdminBottomBar navigation={props.navigation}/> */}
-        {/* <AdminBottomBar navigation={props.navigation}/> */}
-        <AdminBottomBar/>
-    </View>
     );
 }export default AdminScreen;
 
@@ -200,22 +242,21 @@ const styles = StyleSheet.create({
 
     buttonContainer:{
         borderRadius:10,
-        padding: 20,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
         margin: 0,
-        // alignSelf: 'flex-end',
         flex: 1,
         justifyContent: 'flex-end',
-        marginBottom: 36,
-
-        // backgroundColor:'#1E6738',
-        // borderWidth: 5,
-        // borderRadius: 15,   
-
+        marginBottom: 0,
+        zIndex: 999,
     },
     dropDownStyle:{
         height: 40,
         paddingHorizontal:8,
         margin:10,
+        //zIndex: -5 
+        
+        
 
     },
 

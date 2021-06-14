@@ -1,12 +1,15 @@
 import React from 'react'
-import {View, Text, StyleSheet, Touchable, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Touchable, TouchableOpacity,Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+const width1 = Dimensions.get('window').width;
 
 const BottomBar = (props) => {
     
     const navigation = useNavigation();
+
     return (
+        
         <View style={styles.bottomBar}>
             
                 <TouchableOpacity  onPress={() => navigation.navigate('Announcement Page')} style={styles.buttonContainerStyle}>
@@ -90,7 +93,7 @@ const styles = StyleSheet.create({
     },
     buttonTextStyle2: {
         color: '#ffffff',
-        fontSize: 14,
+        fontSize: .03 * width1,
         alignSelf: "center",
         
         

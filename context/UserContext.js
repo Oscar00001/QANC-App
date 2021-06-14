@@ -27,7 +27,9 @@ const UserProvider = (props) => {
         load()
       }),[];
 
-    return <UserContext.Provider value={[contextRoles,setContextRoles]}>{props.children}</UserContext.Provider>;
+    return <UserContext.Provider value={[contextRoles,setContextRoles]}>
+    {props.children}
+           </UserContext.Provider>;
 };
 
 export { UserContext, UserProvider };

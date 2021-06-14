@@ -60,6 +60,7 @@ function AdminScreen(props) {
         <TextInput 
             style={styles.textInput}
             placeholder={'Password1234'}
+            secureTextEntry={true}
             onChangeText={(val)=>setPassword(val)}
         />
 

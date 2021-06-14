@@ -105,7 +105,7 @@ export default Login = (props) => {
     else{return styles.loginButtonSection2}
   }
   const b3Style = function(options) {
-    if(buttonThree == 0){return styles.loginButtonSection} 
+    if(buttonThree == 0) {return styles.loginButtonSection} 
     else{return styles.loginButtonSection2}
   }
   const b4Style = function(options) {
