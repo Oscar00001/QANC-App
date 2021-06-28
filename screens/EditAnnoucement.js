@@ -8,12 +8,13 @@ import moment from 'moment';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Icon from 'react-native-vector-icons/Feather';
 import AdminBottomBar from '../components/AdminBottomBar';
+import { useNavigation } from '@react-navigation/native';
 
 
 const screenWidth = Dimensions.get('window').width;
 
 function AdminScreen(props) {
-
+    const navigation = useNavigation();
     const [data, setData] = useState([]);
     const [id, setID] = useState('default');
     const [title, setTitle] = useState('default');
@@ -92,6 +93,7 @@ function AdminScreen(props) {
             console.log(e)
             throw(e)
         }
+        navigation.navigate('Home Page')
     }
 
     const deleteButtonHandeler = () => {
@@ -110,6 +112,7 @@ function AdminScreen(props) {
         catch (e) {
             throw(e)
         }
+        navigation.navigate('Home Page')
     }
 
 

@@ -15,6 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 const screenWidth = Dimensions.get('window').width;
 
 function AdminScreen(props) {
+    const navigation = useNavigation();
     // fetch('https://eo9260z47k.execute-api.us-east-2.amazonaws.com/default/addAnnouncement')
     // .then((response) => response.json())
     // .then((responseJson) => {
@@ -44,7 +45,7 @@ function AdminScreen(props) {
             console.log(e)
             throw(e)
     }
-        
+        navigation.navigate('Home Page')
     }
     return (
         <View style={styles.background}>

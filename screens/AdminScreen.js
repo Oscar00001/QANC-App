@@ -89,9 +89,6 @@ function AdminScreen(props) {
                 })
             }
 
-
-
-            
         })
         } catch (e) {
             alert(JSON.stringify(error));
@@ -148,7 +145,7 @@ function AdminScreen(props) {
             console.log(e)
             throw(e)
         }
-        
+        navigation.navigate('Home Page')
     }
     return (
         <View style={styles.background}>
