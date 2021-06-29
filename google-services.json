@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "226699420461",
+    "project_id": "qanc-project",
+    "storage_bucket": "qanc-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226699420461:android:728e14642b02743164e9a4",
+        "android_client_info": {
+          "package_name": "qanc.test.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226699420461-ukt69670kg0o4rbptudsc0tsod5k5anv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdBMFG6oddkOzt4dFLg1wHK0WCA_6KUkI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226699420461-ukt69670kg0o4rbptudsc0tsod5k5anv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
