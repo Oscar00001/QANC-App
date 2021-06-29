@@ -4,7 +4,7 @@
     "slug": "QANC-App",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/AppIcon.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -20,7 +20,9 @@
       "supportsTablet": true
     },
     "android": {
-      "package": "qanc.test.app",
+      "package": "qanc.app",
+      "versionCode": 4,
+      "permissions": ["READ_PHONE_STATE"],
       "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",

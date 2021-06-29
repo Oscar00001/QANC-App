@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:226699420461:android:728e14642b02743164e9a4",
+        "mobilesdk_app_id": "1:226699420461:android:4e4ecf8f2ea1a8c364e9a4",
         "android_client_info": {
-          "package_name": "qanc.test.app"
+          "package_name": "qanc.app"
         }
       },
       "oauth_client": [
@@ -35,5 +35,5 @@
       }
     }
   ],
-  "configuration_version": "1"
+  "configuration_version": "4"
 }
