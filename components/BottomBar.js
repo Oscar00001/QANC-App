@@ -1,6 +1,7 @@
 import React from 'react'
 import {View, Text, StyleSheet, Touchable, TouchableOpacity,Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 const width1 = Dimensions.get('window').width;
 
@@ -84,21 +85,24 @@ const styles = StyleSheet.create({
     },
     buttonTextStyle: {
         color: '#ffffff',
-        fontSize: 18,
+        // fontSize: 18,
+        fontSize: RFValue(12,680), // second argument is standardScreenHeight(optional),
+
         alignSelf: "center",
         
         
         //textAlign: 'center',
-        //fontWeight: "bold",
+        fontWeight: "bold",
     },
     buttonTextStyle2: {
         color: '#ffffff',
-        fontSize: .03 * width1,
+        // fontSize: .03 * width1,
         alignSelf: "center",
-        
+        fontSize: RFValue(10,680), // second argument is standardScreenHeight(optional),
+        // fontSize:RFPercentage(1.52),
         
         //textAlign: 'center',
-        //fontWeight: "bold",
+        fontWeight: "bold",
     },
 
     

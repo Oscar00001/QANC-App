@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Text, StyleSheet, Touchable, TouchableOpacity} from 'react-native';
 import { useContext} from 'react';
 import { UserContext } from '../context/UserContext';
-
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 const Announcement = (props) => {
 
     
@@ -69,12 +69,12 @@ const Announcement = (props) => {
         <View style = {announcementStyle()}>
             <View style = {styles.itemLeft}>
                 {/* <TouchableOpacity styles = {styles.square}></TouchableOpacity> */}
-                <Text style={{ fontSize: 20, fontWeight:'bold', textDecorationLine: 'underline',}}> {props.title} </Text>
+                <Text style={{ fontSize: RFValue(13,680), fontWeight:'bold', textDecorationLine: 'underline',}}> {props.title} </Text>
                 
             </View>
 
             <View style={{ padding:10,}}>
-                <Text styles = {styles.textStyle}> {props.text}</Text>
+                <Text style = {styles.textStyle}> {props.text}</Text>
             </View>
 
 
@@ -105,9 +105,9 @@ const styles = StyleSheet.create ({
     
     textStyle: {
         color: '#f1cf5b',
-        fontSize:200,
-        textAlign: 'right',
-        padding:15,
+        fontSize:RFValue(13,680),
+        textAlign: 'center',
+        padding:10,
     },
     itemLeft: {
         flexDirection: 'row',
@@ -149,5 +149,3 @@ const styles = StyleSheet.create ({
 
 
 });
-
-

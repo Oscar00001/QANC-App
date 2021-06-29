@@ -9,7 +9,7 @@ import BottomBar from '../components/BottomBar';
 import TopBar from '../components/TopBar';
 import { UserContext } from '../context/UserContext';
 import { useNavigation } from '@react-navigation/native';
-
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 function AnnouncementsScreen(props) {
 
@@ -89,7 +89,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#2d0f4c',
         alignItems: 'flex-start',
-        justifyContent: 'flex-start',
+        // justifyContent: 'flex-start',
+        justifyContent: 'center', 
+        alignItems: 'center' 
     },
     announcementsWrapper : {
         paddingTop: 20,
@@ -102,8 +104,11 @@ const styles = StyleSheet.create({
     },
     sectionTitle:{
         color: '#f1cf5b',
-        fontSize:45,
+        // fontSize:RFPercentage(1),
+        fontSize: RFValue(32,680), // second argument is standardScreenHeight(optional),
         fontWeight: 'bold',
+        textAlign: "center",
+
     },
     mainContent: {
         flex: 8,
