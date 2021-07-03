@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState,useEffect } from 'react';
-import {View, StyleSheet, Text, Button, TextInput, KeyboardAvoidingView,TouchableOpacity,Dimensions} from 'react-native';
+import {View, StyleSheet, Text, Button, TextInput,TouchableOpacity,Dimensions} from 'react-native';
 
 import BottomBar from '../components/BottomBar';
 import TopBar from '../components/TopBar';
@@ -57,14 +57,12 @@ function AdminScreen(props) {
         
 
         <Text style = {styles.textStyle}>Please Enter Password to sign-in</Text>
-        <KeyboardAvoidingView behavior={'position'}>
         <TextInput 
             style={styles.textInput}
             placeholder={'Password1234 '}
             secureTextEntry={true}
             onChangeText={(val)=>setPassword(val)}
         />
-        </KeyboardAvoidingView>
 
 
         <View style = {styles.buttonContainer}>
@@ -72,12 +70,7 @@ function AdminScreen(props) {
               <Text style = {styles.buttonText}>Submit</Text>
             </TouchableOpacity>
         </View>
-{/* <KeyboardAvoidingView style = {styles.buttonContainer}>
-<TouchableOpacity onPress = {buttonHandeler}>
-              <Text style = {styles.buttonText}>Submit</Text>
-            </TouchableOpacity>
 
-</KeyboardAvoidingView> */}
 
 
 
