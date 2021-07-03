@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState,useEffect } from 'react';
-import {View, StyleSheet, Text, Button, TextInput, Dimensions} from 'react-native';
+import {View, StyleSheet, Text, Button, TextInput, KeyboardAvoidingView,TouchableOpacity,Dimensions} from 'react-native';
 
 import BottomBar from '../components/BottomBar';
 import TopBar from '../components/TopBar';
@@ -57,18 +57,36 @@ function AdminScreen(props) {
         
 
         <Text style = {styles.textStyle}>Please Enter Password to sign-in</Text>
+        <KeyboardAvoidingView behavior={'position'}>
         <TextInput 
             style={styles.textInput}
-            placeholder={'Password1234'}
+            placeholder={'Password1234 '}
             secureTextEntry={true}
             onChangeText={(val)=>setPassword(val)}
         />
+        </KeyboardAvoidingView>
+
 
         <View style = {styles.buttonContainer}>
-            <Button  onPress={buttonHandeler} title='Submit'/>
+            <TouchableOpacity onPress = {buttonHandeler}>
+              <Text style = {styles.buttonText}>Submit</Text>
+            </TouchableOpacity>
         </View>
+{/* <KeyboardAvoidingView style = {styles.buttonContainer}>
+<TouchableOpacity onPress = {buttonHandeler}>
+              <Text style = {styles.buttonText}>Submit</Text>
+            </TouchableOpacity>
+
+</KeyboardAvoidingView> */}
+
+
+
+
+
          {/* This is where all of our content will go!*/}
         
+
+
         </View>
         <BottomBar navigation={props.navigation}/>
     </View>
@@ -79,14 +97,18 @@ function AdminScreen(props) {
 const styles = StyleSheet.create({
     background:{
         flex: 1,
+        // justifyContent: "center",
+        alignItems: 'center',
         backgroundColor: '#2d0f4c',
     },
     mainContent: {
         flex: 8,
-        
+        //  alignItems: 'center',
+
     },
 
     textInput: {
+        borderRadius:80,
         backgroundColor: '#ffffff',
         borderColor:'#222',
         color: '#000',
@@ -108,17 +130,28 @@ const styles = StyleSheet.create({
     },
 
     buttonContainer:{
-        borderRadius:10,
-        padding: 20,
-        margin: 0,
-        // alignSelf: 'flex-end',
-        flex: 1,
-        justifyContent: 'flex-end',
-        marginBottom: 36,
-
-        // backgroundColor:'#1E6738',
-        // borderWidth: 5,
-        // borderRadius: 15,   
+        borderRadius:80,
+        padding: 12,
+        alignSelf: 'center',
+        height: 50,   
+        backgroundColor: '#f1cf5b',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        bottom:10,
+        position: 'absolute',
+        width:200,
 
     },
+    buttonText: {
+		color: '#aD4042', // CD6012 // 3C1A00
+		fontSize: 18,
+        padding: 1, // makes it look like a real button
+        position: 'relative',
+        flexDirection: 'column',
+        marginBottom:10,
+        justifyContent: "center",
+        alignSelf: "center",
+        textAlignVertical: "center",
+
+	}, 
 })

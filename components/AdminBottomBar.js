@@ -1,6 +1,7 @@
 import React from 'react'
 import {View, Text, StyleSheet, Touchable, TouchableOpacity} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 
 const AdminBottomBar = (props) => {
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
     },
     buttonTextStyle: {
         color: '#ffffff',
-        fontSize: 18,
+        fontSize: RFValue(12,680), // second argument is standardScreenHeight(optional),
         alignSelf: "center",
         
         
@@ -90,7 +91,7 @@ const styles = StyleSheet.create({
     },
     buttonTextStyle2: {
         color: '#ffffff',
-        fontSize: 14,
+        fontSize: RFValue(12,680), // second argument is standardScreenHeight(optional),
         alignSelf: "center",
         
         

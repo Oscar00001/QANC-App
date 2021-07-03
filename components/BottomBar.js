@@ -14,7 +14,7 @@ const BottomBar = (props) => {
         <View style={styles.bottomBar}>
             
                 <TouchableOpacity  onPress={() => navigation.navigate('Announcement Page')} style={styles.buttonContainerStyle}>
-                    <Text style={styles.buttonTextStyle2}>Announcements</Text>
+                    <Text style={styles.buttonTextStyle2}>News</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity  onPress={() => navigation.navigate('Calendar Page')} style={styles.buttonContainerStyle}>
@@ -85,12 +85,11 @@ const styles = StyleSheet.create({
     },
     buttonTextStyle: {
         color: '#ffffff',
-        // fontSize: 18,
-        fontSize: RFValue(12,680), // second argument is standardScreenHeight(optional),
+        fontSize: 20,
+        // fontSize:RFPercentage(2),
 
+        // fontSize: RFValue(20,680), // second argument is standardScreenHeight(optional),
         alignSelf: "center",
-        
-        
         //textAlign: 'center',
         fontWeight: "bold",
     },
@@ -98,8 +97,9 @@ const styles = StyleSheet.create({
         color: '#ffffff',
         // fontSize: .03 * width1,
         alignSelf: "center",
-        fontSize: RFValue(10,680), // second argument is standardScreenHeight(optional),
-        // fontSize:RFPercentage(1.52),
+        fontSize: 20,
+        // fontSize: RFValue(20,680), // second argument is standardScreenHeight(optional),
+        // fontSize:RFPercentage(3),
         
         //textAlign: 'center',
         fontWeight: "bold",

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import {View, StyleSheet, Text, Button, TextInput, Dimensions} from 'react-native';
+import {View, StyleSheet, Text, Button, TextInput, TouchableOpacity,Dimensions} from 'react-native';
 
 import BottomBar from '../components/BottomBar';
 import TopBar from '../components/TopBar';
@@ -181,22 +181,35 @@ function AdminScreen(props) {
             {/* Spacer */}
             <View style={{flex:3}}></View> 
             
-            {/* Submit Button */}
+            {/* Submit Button
             <View style = {styles.submitButtonContainer}>
                 <Button  
                 onPress={buttonHandeler} 
                 title='Submit'/>
-            </View>
+            </View> */}
+
+            <View style = {styles.buttonContainer}>
+            <TouchableOpacity onPress = {buttonHandeler}>
+            <Text style = {styles.buttonText}>Submit</Text>
+            </TouchableOpacity>
+        </View>
+
             
-            {/* Delete Button */}
+            {/* Delete Button
             <View style = {styles.deleteButtonContainer}>
                 <Button
                     onPress={deleteButtonHandeler} 
                     title="Delete"
                     color="#ff0000"
                 />
-            </View>
-        
+            </View> */}
+
+            <View style = {styles.buttonContainerDelete}>
+            <TouchableOpacity onPress = {buttonHandeler}>
+            <Text style = {styles.buttonTextDelete}>Delete</Text>
+            </TouchableOpacity>
+        </View>
+
         </View>
 
         {/* <AdminBottomBar navigation={props.navigation}/> */}
@@ -209,7 +222,9 @@ function AdminScreen(props) {
 
 const styles = StyleSheet.create({
     background:{
-        flex: 1,
+        flex: 1,        
+        // justifyContent: "center",
+        // alignItems: 'center',
         backgroundColor: '#2d0f4c',
     },
     mainContent: {
@@ -269,4 +284,55 @@ const styles = StyleSheet.create({
         paddingHorizontal:8,
         margin:10,
     },
+    buttonContainer:{
+        borderRadius:80,
+        padding: 12,
+        alignSelf: 'center',
+        height: 50,   
+        backgroundColor: '#f1cf5b',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        bottom:50,
+        position: 'absolute',
+        width:200,
+        marginBottom:10,
+
+    },
+    buttonContainerDelete:{
+        borderRadius:80,
+        padding: 12,
+        alignSelf: 'center',
+        height: 50,   
+        backgroundColor: '#ff0000',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        bottom:0,
+        position: 'absolute',
+        width:200,
+
+    },
+    buttonText: {
+		color: '#aD4042', // CD6012 // 3C1A00
+		fontSize: 18,
+        padding: 1, // makes it look like a real button
+        position: 'relative',
+        flexDirection: 'column',
+        marginBottom:10,
+        justifyContent: "center",
+        alignSelf: "center",
+        textAlignVertical: "center",
+
+	}, 
+    buttonTextDelete: {
+		color: '#ffffff', // CD6012 // 3C1A00
+		fontSize: 18,
+        padding: 1, // makes it look like a real button
+        position: 'relative',
+        flexDirection: 'column',
+        marginBottom:10,
+        justifyContent: "center",
+        alignSelf: "center",
+        textAlignVertical: "center",
+
+	}, 
 })

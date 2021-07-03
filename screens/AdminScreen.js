@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import {View, StyleSheet, Text, Button, TextInput, Dimensions} from 'react-native';
+import {View, StyleSheet, Text, Button, TextInput,TouchableOpacity, Dimensions} from 'react-native';
 
 import BottomBar from '../components/BottomBar';
 import TopBar from '../components/TopBar';
@@ -188,9 +188,16 @@ function AdminScreen(props) {
                         containerStyle={styles.dropDownStyle}
                     />
 
-                <View style = {styles.buttonContainer}>
+                {/* <View style = {styles.buttonContainer}>
                     <Button  onPress={buttonHandeler} title='Submit'/>
+                </View> */}
+                <View style = {styles.buttonContainer}>
+                    <TouchableOpacity onPress = {buttonHandeler}>
+                      <Text style = {styles.buttonText}>Submit</Text>
+                    </TouchableOpacity>
                 </View>
+
+
             </View>
             <AdminBottomBar/>
         </View>
@@ -256,5 +263,31 @@ const styles = StyleSheet.create({
         
 
     },
+    buttonContainer:{
+        borderRadius:80,
+        padding: 12,
+        alignSelf: 'center',
+        height: 50,   
+        backgroundColor: '#f1cf5b',
+        justifyContent: 'center',
+        flexDirection: 'column',
+        bottom:10,
+        position: 'absolute',
+        width:200,
+
+
+    },
+    buttonText: {
+		color: '#aD4042', // CD6012 // 3C1A00
+		fontSize: 18,
+        padding: 1, // makes it look like a real button
+        position: 'relative',
+        flexDirection: 'column',
+        marginBottom:10,
+        justifyContent: "center",
+        alignSelf: "center",
+        textAlignVertical: "center",
+
+	}, 
 
 })

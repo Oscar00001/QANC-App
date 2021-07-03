@@ -3,6 +3,8 @@ import { View, Text, StyleSheet,TouchableOpacity,Button,Image } from "react-nati
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { UserContext } from '../context/UserContext';
 import TopBar from '../components/TopBar';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+
 export default Login = (props) => {
 
     const [roles,setRoles] = useState([]);
@@ -127,7 +129,7 @@ export default Login = (props) => {
                 style={styles.logo}
                 source={require('../assets/Crown.png')}
               />
-              <Text style={styles.logoText}>Welcome, Please Pick A Group</Text>
+              <Text style={styles.logoText}>  Welcome, Please Pick A Group  </Text>
             </View>
 
             <View style= {b1Style()}>
@@ -149,7 +151,7 @@ export default Login = (props) => {
           </View>
 
           <View style= {b4Style()}>
-            <TouchableOpacity onPress = {() => addRole("Women’s History Month Honorees") }>
+            <TouchableOpacity onPress = {() => addRole(" Women’s History Month Honorees") }>
               <Text style = {styles.buttonText}>Women’s History Month Honorees</Text>
             </TouchableOpacity>
           </View>
@@ -182,6 +184,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: 'center',
+        // marginHorizontal: 1,
+
         backgroundColor: '#2d0f4c',
     },
     loginButtonSection: {
@@ -194,7 +198,7 @@ const styles = StyleSheet.create({
       borderRadius: 50,
       borderWidth: 4,
       borderColor: '#5d57ff',
-      //width: '70%',
+      // width: '90%',
       height: '5%',
       flexDirection: 'column',
       flex: 1,
@@ -221,9 +225,10 @@ const styles = StyleSheet.create({
     //  flexGrow:1,
      justifyContent: 'center',
      flexDirection: 'column',
-     height: '1%',
-     margin: 90,
-     flex: 0,
+    //  height: '1%',
+     marginBottom:10,
+    //  margin: 90,
+     flex: 5,
    },
    logo:{
      width:150,
@@ -231,12 +236,19 @@ const styles = StyleSheet.create({
    },
    logoText:{
      color:'#CD6012', //FFF
-     fontSize:15
-   },
+    //  fontSize:15,
+    fontSize: RFValue(15,680),
+     marginBottom:1,
+     padding: 12,
+
+    },
    buttonText: {
 		// textTransform: 'uppercase',
 		color: '#aD4042', // CD6012 // 3C1A00
 		fontSize: 16,
+    alignSelf: 'center',
+    padding: 12
+
 	}, 
   mainContent: {
     flex: 8,
