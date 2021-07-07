@@ -295,7 +295,7 @@ const styles = StyleSheet.create({
         bottom:50,
         position: 'absolute',
         width:200,
-        marginBottom:10,
+        marginBottom:15,
 
     },
     buttonContainerDelete:{
@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ff0000',
         justifyContent: 'center',
         flexDirection: 'column',
-        bottom:0,
+        bottom:10,
         position: 'absolute',
         width:200,
 
@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
         padding: 1, // makes it look like a real button
         position: 'relative',
         flexDirection: 'column',
-        marginBottom:10,
+        marginBottom:1,
         justifyContent: "center",
         alignSelf: "center",
         textAlignVertical: "center",
@@ -329,7 +329,7 @@ const styles = StyleSheet.create({
         padding: 1, // makes it look like a real button
         position: 'relative',
         flexDirection: 'column',
-        marginBottom:10,
+        marginBottom:1,
         justifyContent: "center",
         alignSelf: "center",
         textAlignVertical: "center",

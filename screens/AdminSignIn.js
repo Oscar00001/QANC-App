@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
         padding: 1, // makes it look like a real button
         position: 'relative',
         flexDirection: 'column',
-        marginBottom:10,
+        marginBottom:1,
         justifyContent: "center",
         alignSelf: "center",
         textAlignVertical: "center",

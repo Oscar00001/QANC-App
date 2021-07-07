@@ -22,12 +22,7 @@ export default AppStackScreens = () => {
         <AppStack.Navigator headerMode="none">
             
             {contextRoles.length == 0 ? (
-                <AppStack.Screen name="Roles" component={Login} 
-
-                  />
-            // ) :contextRoles.isAdmin == true?(
-            //     <AppStack.Screen name="Admin" component={AdminStackScreens} />
-
+                <AppStack.Screen name="Roles" component={Login} />
             ): (
                 <AppStack.Screen name="Main" component={MainStackScreens} />
             ) 
